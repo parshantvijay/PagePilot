@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Pilot: Your Bookish Navigator!</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffff; /* Change background color to white */
+            color: #222; /* Change text color to dark gray */
+            /* display: grid;   */
+        }
+
+        header {
+            background-color: #155815;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            height: 50px;
+            margin-right: 1rem;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0 1rem;
+        }
+
+        nav a:hover {
+            color: #052a05;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 1rem;
+        }
+
+        .bookshelf {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 1rem;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .book {
+            background-color: #f9f9f9; 
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            border: 5px solid #fff; 
+            border-radius: 10px;
+        }
+
+        .book:hover {
+            transform: translateY(-5px);
+            border-color:#228B22;
+
+        }
+
+        .book-title {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-author {
+            font-size: 0.9rem;
+            color: #777; /* Change author text color to light gray */
+        }
+
+        .book-rating {
+            font-size: 0.7rem;
+            color: #777; /* Change rating text color to light gray */
+        }
+
+        .book-image{
+            width:100%;
+            height:auto;
+            border-radius: 5px;
+        }
+
+        .hero {
+            /* background-color: #556B2F;
+            padding: 100px 0;
+            text-align: center;
+            color: #fff; */
+
+            background-image: url('/static/background.png');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+            color: #f2f2f2;
+            border: #037203 solid 3px;
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        button {
+            background-color:#052a05;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #052a05;
+        }
+        footer {
+            margin-top: 30px;
+            background-color: #f2f2f2;
+            color: #333  ;
+            text-align: center;
+            padding: 10px;
+        }
+
+        footer a {
+            color: #333;
+        }
+        .about-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="PagePilotLogo" class="logo">
+    <nav>
+        <a href="/homepage">Home</a>
+        <a href="/">Popular Books</a>
+        <form action="/recommend" method="GET">
+            <button type="submit">Recommend Me</button>
+        </form>
+    </nav>
+</header>
+
+<main>
+    <div class="hero">
+        <h1>Welcome to Page Pilot: Your Bookish Navigator! </h1>
+        <!-- <p>Your Bookish Navigator</p> -->
+        <p>Explore similar reads based on your favorite book!</p>
+    </div>
+
+    <!-- <div class="welcome-message">
+        <h1>LATEST BOOKS</h1>
+    </div> -->
+
+    <!-- <div class="bookshelf">
+        <div class="book">
+            <img class="book-image" src="https://images.amazon.com/images/P/0195153448.01.LZZZZZZZ.jpg" alt="Book Cover">
+            <h2 class="book-title">Book Title 1</h2>
+            <h2 class="book-author">Author Name</h2>
+            <h2 class="book-rating">Votes - 100</h2>
+            <h2 class="book-rating">Rating - 4.5</h2>
+        </div>
+        <div class="book">
+            <img class="book-image" src="https://images.amazon.com/images/P/0195153448.01.LZZZZZZZ.jpg" alt="Book Cover">
+            <h2 class="book-title">Book Title 2</h2>
+            <h2 class="book-author">Author Name</h2>
+            <h2 class="book-rating">Votes - 200</h2>
+            <h2 class="book-rating">Rating - 4.2</h2>
+        </div>
+        <div class="book">
+            <img class="book-image" src="https://images.amazon.com/images/P/0195153448.01.LZZZZZZZ.jpg" alt="Book Cover">
+            <h2 class="book-title">Book Title 3</h2>
+            <h2 class="book-author">Author Name</h2>
+            <h2 class="book-rating">Votes - 150</h2>
+            <h2 class="book-rating">Rating - 4.8</h2>
+        </div>
+        <div class="book">
+            <img class="book-image" src="https://images.amazon.com/images/P/0195153448.01.LZZZZZZZ.jpg" alt="Book Cover">
+            <h2 class="book-title">Book Title 3</h2>
+            <h2 class="book-author">Author Name</h2>
+            <h2 class="book-rating">Votes - 150</h2>
+            <h2 class="book-rating">Rating - 4.8</h2>
+        </div>
+    </div> -->
+    <div class="about-section">
+        <h2>How Our Recommender Engine Works</h2>
+        <p>Our recommender engine leverages Collaborative Item Based Filtering, a sophisticated technique that analyzes user interactions to generate personalized book recommendations.</p>
+        
+        <h3 style="margin-top: 20px;">Collaborative Item Based Filtering - Recommender System</h3>
+        
+        <p>Collaborative Item Based Filtering is at the heart of our recommendation system. It's a process that revolves around understanding user preferences and recommending books based on similar user interactions. Here's a detailed overview:</p>
+        
+        <ol style="margin-top: 20px;">
+            <li style="margin-left: 20px;">Identification of High Rating Users</li>
+            <li style="margin-left: 20px;">Filtering Ratings</li>
+            <li style="margin-left: 20px;">Selection of Popular Books by High-Rated Users</li>
+            <li style="margin-left: 20px;">Creation of a Pivot Table</li>
+            <li style="margin-left: 20px;">Calculation of Similarity Scores</li>
+            <li style="margin-left: 20px;">Recommendation Generation</li>
+        </ol>
+        
+        <p style="margin-top: 20px;">The data powering our recommender engine is sourced from Kaggle's Book Recommendation Dataset, ensuring the integrity and richness of our recommendation system.</p>
+    </div>
+    
+    <footer>
+        <p>Developed by <a href="https://github.com/parshantvijay">Parshant Vijay</a></p>
+    </footer>
+</body>
+</html>

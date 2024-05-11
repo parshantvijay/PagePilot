@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Pilot: Your Bookish Navigator!</title>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffff; /* Change background color to white */
+            color: #222; /* Change text color to dark gray */
+            display: grid;
+        }
+
+        header {
+            background-color: #155815;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            height: 50px;
+            margin-right: 1rem;
+            width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0 1rem;
+        }
+
+        nav a:hover {
+            color: #052a05;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 1rem;
+        }
+
+        .bookshelf {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 1rem;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 10px;
+            font-style: normal;
+        }
+
+        .book {
+            background-color: #f9f9f9; 
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            border: 5px solid #fff; 
+            border-radius: 10px;
+        }
+
+        .book:hover {
+            transform: translateY(-5px);
+            border-color: #228B22 
+        }
+
+        .book-title {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-author {
+            font-size: 0.9rem;
+            color: #777; /* Change author text color to light gray */
+        }
+
+        .book-rating {
+            font-size: 0.7rem;
+            color: #777; /* Change rating text color to light gray */
+        }
+
+        .book-image {
+            width: 100%;
+            height: auto;
+            border: 3px solid #fff; /* Change border color to white */
+            border-radius: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            background-color: #333;
+            color: #ddd;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            background-color: #052a05;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #052a05;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="PagePilotLogo" class="logo">
+    <nav>
+        <a href="/homepage">Home</a>
+        <a href="/">Popular Books</a>
+        <form action="/recommend" method="GET">
+            <button type="submit">Recommend Me</button>
+        </form>
+    </nav>
+</header>
+
+<main>
+    <!-- <div class="welcome-message">
+        <h1>Welcome to PagePilot!</h1>
+        <p>Your Bookish Navigator</p>
+    </div> -->
+    <div class="welcome-message">
+        <h1>POPULAR BOOKS</h1>
+    </div>
+
+    <div class="bookshelf">
+        {% for book_title, author, image, vote, rating in books_data %}
+            <div class="book">
+                <img class="book-image" src="{{ image }}" alt="Book Cover">
+                <h2 class="book-title">{{ book_title }}</h2>
+                <h2 class="book-author">{{ author }}</h2>
+                <h2 class="book-rating">Votes - {{ vote }}</h2>
+                <h2 class="book-rating">Rating - {{ rating }}</h2>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
